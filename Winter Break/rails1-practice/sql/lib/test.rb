@@ -29,13 +29,14 @@ def gold_cat_toys
   # Sort the toys by name alphabetically.
 
   execute(<<-SQL)
-    SELECT
+    SELECT  
       name
     FROM
       toys
     WHERE
-      color = 'Gold' AND name LIKE '% %'
-    ORDER BY
+      color = 'Gold'
+      AND name LIKE '% %'
+    ORDER BY 
       name;
   SQL
 end
@@ -47,19 +48,19 @@ def extra_jet_toys
 
   execute(<<-SQL)
     SELECT
-      toys.name, COUNT(toys.*) AS amount
+      toys.name, COUNT(toys.id)
     FROM
-      cats
+      toys
     JOIN cat_toys
-      ON cats.id = cat_toys.cat_id
-    JOIN toys
-      ON cat_toys.toy_id = toys.id
-    WHERE 
+      ON toys.id = cat_toys.toy_id
+    JOIN cats
+      ON cat_toys.cat_id = cats.id
+    WHERE
       cats.name = 'Jet'
     GROUP BY
       toys.name
     HAVING
-      COUNT(toys.*) >= 2
+      COUNT(toys.id) > 1
     ORDER BY
       toys.name;
   SQL
@@ -71,7 +72,7 @@ def cats_with_a_lot
   # Sort the cats by cat name alphabetically.
 
   execute(<<-SQL)
-    SELECT
+    SELECT  
       cats.name
     FROM
       cats
@@ -83,7 +84,7 @@ def cats_with_a_lot
       COUNT(cat_toys.toy_id) > 7
     ORDER BY
       cats.name;
-    
+
   SQL
 end
 
@@ -94,21 +95,21 @@ def just_like_orange
   # Order by cats name alphabetically.
 
   execute(<<-SQL)
-  SELECT
-    name, breed
-  FROM
-    cats
-  WHERE
-    breed = 
-          (SELECT
-            breed
-          FROM
-            cats
-          WHERE
-            name = 'Orange')
+    SELECT
+      name, breed
+    FROM
+      cats
+    WHERE
+      breed = 
+    (SELECT
+      breed
+    FROM
+      cats
+    WHERE
+      name = 'Orange')
     AND name != 'Orange'
-  ORDER BY
-    name;
+    ORDER BY 
+      name;
   SQL
 end
 
@@ -119,28 +120,27 @@ def expensive_tastes
   # Sort by cat name alphabetically.
  
   execute(<<-SQL)
-  SELECT
-    cats.name, toys.name, toys.color
-  FROM
-    cats
-  JOIN cat_toys
-    ON cats.id = cat_toys.cat_id
-  JOIN toys
-    ON cat_toys.toy_id = toys.id
-  WHERE
-    toys.id = 
-            (SELECT
-              id
-            FROM
-              toys
-            WHERE
-              name = 'Tiger'
-            ORDER BY
-              toys.price DESC
-            LIMIT 
-              1)
-  ORDER BY
-    cats.name;
-    
+    SELECT
+      cats.name, toys.name, toys.color
+    FROM
+      toys
+    JOIN cat_toys
+      ON toys.id = cat_toys.toy_id
+    JOIN cats
+      ON cat_toys.cat_id = cats.id
+    WHERE
+      toys.id = 
+    (SELECT
+      toys.id
+    FROM
+      toys
+    WHERE
+      name = 'Tiger'
+    ORDER BY
+      price DESC
+    LIMIT
+      1)
+    ORDER BY
+      cats.name;
   SQL
 end
