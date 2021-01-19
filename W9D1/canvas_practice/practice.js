@@ -1,0 +1,24 @@
+document.addEventListener("DOMContentLoaded", function(){
+const canvasEl = document.getElementById('mycanvas');
+canvasEl.width = 500;
+canvasEl.height = 500;
+let ctx = canvasEl.getContext('2d');
+ctx.fillStyle = 'blue';
+ctx.fillRect(8,8,100,50);
+ctx.beginPath();
+ctx.arc(100,100,50,0,2* Math.PI,false);
+ctx.strokeStyle = 'green';
+ctx.lineWidth = 10;
+ctx.stroke();
+ctx.fillStyle = 'yellow';
+ctx.fill();
+ctx.beginPath();
+ctx.moveTo(75, 25);
+ctx.quadraticCurveTo(25, 25, 25, 62.5);
+ctx.quadraticCurveTo(25, 100, 50, 100);
+ctx.quadraticCurveTo(50, 120, 30, 125);
+ctx.quadraticCurveTo(60, 120, 65, 100);
+ctx.quadraticCurveTo(125, 100, 125, 62.5);
+ctx.quadraticCurveTo(125, 25, 75, 25);
+ctx.stroke();
+});
