@@ -4,7 +4,7 @@ canvasEl.width = 500;
 canvasEl.height = 500;
 let ctx = canvasEl.getContext('2d');
 ctx.fillStyle = 'blue';
-ctx.fillRect(8,8,100,50);
+ctx.fillRect(100,50,100,50);
 ctx.beginPath();
 ctx.arc(100,100,50,0,2* Math.PI,false);
 ctx.strokeStyle = 'green';
