@@ -7,5 +7,5 @@ const selectLocation = (city, jobs) => {
     }
 }
 
-window.selectLocation = selectLocation;
+// window.selectLocation = selectLocation;
 export default selectLocation;
