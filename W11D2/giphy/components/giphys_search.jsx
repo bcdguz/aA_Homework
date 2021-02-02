@@ -21,15 +21,19 @@ class GiphysSearch extends React.Component {
     }
 
     render() {
+    
         return (
-            <>
+            <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Search for giphs:
                         <input onChange={this.handleChange} type="text" value={this.state.searchTerm}/>
                     </label>
+                    <br/>
+                    <button>Search!</button>
                 </form>
                 <GiphysIndex giphys={this.props.giphys}/>
-            </>
+            </div>
+            
         )
     }
 }
